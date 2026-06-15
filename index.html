@@ -82,6 +82,9 @@
   .barbrowser i{width:10px;height:10px;border-radius:50%;background:#2a3645;display:inline-block}
   .barbrowser .url{margin-left:10px;font-size:11.5px;color:var(--faint);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
   .shot img{display:block;width:100%;height:230px;object-fit:cover;object-position:top left}
+  .codeshot{margin:0;height:230px;overflow:hidden;background:#05080b;color:#8fe3b0;
+    font-family:'JetBrains Mono',monospace;font-size:11px;line-height:1.5;padding:16px 18px;white-space:pre}
+  .codeshot .kw{color:#58a6ff}.codeshot .cm{color:#5d6e80}
   .cbody{padding:22px 22px 24px;display:flex;flex-direction:column;gap:13px;flex:1}
   .ctitle{display:flex;align-items:center;justify-content:space-between;gap:10px}
   .ctitle h3{font-size:19px;font-weight:700;letter-spacing:-.3px}
@@ -239,19 +242,36 @@
         </div>
       </article>
 
-      <!-- Market Dashboard (Python) -->
+      <!-- Markets SQL Analysis -->
       <article class="card">
         <div class="shot">
-          <div class="barbrowser"><i></i><i></i><i></i><span class="url mono">Plotly Dash · Python</span></div>
-          <img src="assets/market-metrics.png" alt="Market Dashboard (Python / Plotly Dash)" style="filter:grayscale(.35) brightness(.8)" />
+          <div class="barbrowser"><i></i><i></i><i></i><span class="url mono">github.com/Jflores37/markets-sql-analysis</span></div>
+          <pre class="codeshot"><span class="cm">-- sector relative strength</span>
+<span class="kw">WITH</span> latest <span class="kw">AS</span> (
+  <span class="kw">SELECT</span> * <span class="kw">FROM</span> scanner_results
+  <span class="kw">WHERE</span> snapshot_date = (
+    <span class="kw">SELECT MAX</span>(snapshot_date)
+    <span class="kw">FROM</span> scanner_results)
+)
+<span class="kw">SELECT</span>
+  <span class="kw">RANK</span>() <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> avg_perf <span class="kw">DESC</span>)
+    <span class="kw">AS</span> sector_rank,
+  sector, avg_perf, pct_stage2
+<span class="kw">FROM</span> sector_stats
+<span class="kw">ORDER BY</span> sector_rank;</pre>
         </div>
         <div class="cbody">
-          <div class="ctitle"><h3>Market Dashboard <span class="mono" style="font-size:13px;color:var(--faint)">(Python)</span></h3><span class="badge code">Private</span></div>
-          <p class="cdesc">The Python predecessor to Market Metrics — a five-section market terminal built
-            with Plotly Dash and pandas ("Should I Trade?", breadth, stage analysis, sector RRG). Where I
-            worked out the data model before rebuilding it in React. Code available on request.</p>
+          <div class="ctitle"><h3>Markets SQL Analysis</h3><span class="badge">Runnable</span></div>
+          <p class="cdesc">Four analyst-style SQL studies on an equity-scanner panel — sector rotation,
+            market breadth, momentum leadership — each framed as a stakeholder decision. Window functions
+            (<span class="mono">RANK, NTILE, LAG, PERCENT_RANK</span>), multi-CTE pipelines, moving-average
+            frames. Runs with one command (SQLite); the same SQL targets Postgres. Synthetic data.</p>
           <div class="stack">
-            <span class="tag">Python</span><span class="tag">Plotly Dash</span><span class="tag">pandas</span>
+            <span class="tag">SQL</span><span class="tag">Window functions</span><span class="tag">CTEs</span>
+            <span class="tag">Postgres / SQLite</span><span class="tag">Python</span>
+          </div>
+          <div class="clinks">
+            <a class="clink alt" href="https://github.com/Jflores37/markets-sql-analysis" target="_blank" rel="noopener">Code + queries ↗</a>
           </div>
         </div>
       </article>
@@ -282,6 +302,12 @@
         <p>An X/Twitter analytics dashboard: a Python worker scrapes niche feeds to Vercel Blob; a React
           app scores and ranks posts. <em>(Demo being cleaned up.)</em></p>
         <div class="stack"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Python</span><span class="tag">Vercel Blob</span></div>
+      </div>
+      <div class="mcard">
+        <h4>Market Dashboard (Python)</h4>
+        <p>The Plotly Dash / pandas predecessor to Market Metrics — a five-section market terminal where I
+          worked out the data model before the React rebuild.</p>
+        <div class="stack"><span class="tag">Python</span><span class="tag">Plotly Dash</span><span class="tag">pandas</span></div>
       </div>
     </div>
   </div>
