@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Jeremy Flores — Data Analyst & Financial-Markets Builder</title>
+<meta name="description" content="Self-taught data analyst and builder. I turn live market data into dashboards, pipelines, and decision tools — shipped and live." />
+<meta property="og:title" content="Jeremy Flores — Data Analyst & Financial-Markets Builder" />
+<meta property="og:description" content="I turn live market data into tools people can actually use. Live dashboards, data pipelines, and automation." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#0a0e12; --bg2:#0d1219; --surface:#111923; --surface2:#151f2b;
+    --border:#1e2a38; --border2:#27384a;
+    --text:#e7eef6; --muted:#8b9bad; --faint:#5d6e80;
+    --green:#3fd07a; --green-dim:#1f7a45; --blue:#58a6ff; --magenta:#e8489b;
+    --r:14px; --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    line-height:1.55; -webkit-font-smoothing:antialiased;
+    background-image:radial-gradient(900px 500px at 80% -10%, rgba(63,208,122,.08), transparent 60%),
+                     radial-gradient(700px 500px at 0% 0%, rgba(88,166,255,.06), transparent 55%);
+  }
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+  section{padding:84px 0}
+
+  /* nav */
+  nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);
+    background:rgba(10,14,18,.72);border-bottom:1px solid var(--border)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+  .navlinks{display:flex;gap:26px;font-size:14px;color:var(--muted)}
+  .navlinks a:hover{color:var(--text)}
+  @media(max-width:640px){.navlinks{display:none}}
+
+  /* hero */
+  .hero{padding:96px 0 70px}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--green);border:1px solid var(--green-dim);
+    background:rgba(63,208,122,.07);padding:6px 13px;border-radius:999px;margin-bottom:26px}
+  .eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--green);
+    box-shadow:0 0 0 0 rgba(63,208,122,.6);animation:pulse 2.2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(63,208,122,.5)}70%{box-shadow:0 0 0 9px rgba(63,208,122,0)}100%{box-shadow:0 0 0 0 rgba(63,208,122,0)}}
+  h1{font-size:clamp(34px,6vw,60px);line-height:1.05;font-weight:800;letter-spacing:-1.4px;max-width:15ch}
+  h1 .hl{background:linear-gradient(90deg,var(--green),#79e0a6);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{margin-top:24px;font-size:clamp(16px,2.2vw,19px);color:var(--muted);max-width:60ch}
+  .cta{margin-top:34px;display:flex;flex-wrap:wrap;gap:12px}
+  .btn{display:inline-flex;align-items:center;gap:9px;padding:12px 18px;border-radius:11px;
+    font-size:14.5px;font-weight:600;border:1px solid var(--border2);background:var(--surface);
+    transition:.18s;color:var(--text)}
+  .btn:hover{transform:translateY(-2px);border-color:var(--green-dim);background:var(--surface2)}
+  .btn.primary{background:var(--green);color:#04130a;border-color:var(--green)}
+  .btn.primary:hover{box-shadow:0 8px 26px rgba(63,208,122,.28);background:#46db84}
+  .ticker{margin-top:46px;display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-size:12.5px;color:var(--muted);border:1px solid var(--border);background:var(--bg2);
+    padding:6px 11px;border-radius:8px}
+  .chip b{color:var(--green);font-weight:600}
+
+  /* section heading */
+  .shead{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+  .shead .num{font-size:13px;color:var(--green)}
+  h2{font-size:clamp(24px,3.6vw,34px);font-weight:700;letter-spacing:-.6px}
+  .sub{color:var(--muted);margin-bottom:38px;max-width:62ch}
+
+  /* projects */
+  .grid{display:grid;gap:26px}
+  .card{background:linear-gradient(180deg,var(--surface),var(--bg2));border:1px solid var(--border);
+    border-radius:var(--r);overflow:hidden;transition:.2s;display:flex;flex-direction:column}
+  .card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 18px 50px rgba(0,0,0,.45)}
+  .shot{position:relative;border-bottom:1px solid var(--border);background:#05080b}
+  .barbrowser{display:flex;align-items:center;gap:6px;padding:9px 13px;border-bottom:1px solid var(--border);background:var(--bg)}
+  .barbrowser i{width:10px;height:10px;border-radius:50%;background:#2a3645;display:inline-block}
+  .barbrowser .url{margin-left:10px;font-size:11.5px;color:var(--faint);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .shot img{display:block;width:100%;height:230px;object-fit:cover;object-position:top left}
+  .cbody{padding:22px 22px 24px;display:flex;flex-direction:column;gap:13px;flex:1}
+  .ctitle{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .ctitle h3{font-size:19px;font-weight:700;letter-spacing:-.3px}
+  .badge{font-size:11px;letter-spacing:.04em;text-transform:uppercase;padding:4px 9px;border-radius:6px;
+    border:1px solid var(--green-dim);color:var(--green);background:rgba(63,208,122,.08);white-space:nowrap}
+  .badge.code{border-color:var(--border2);color:var(--muted);background:var(--bg2)}
+  .cdesc{color:var(--muted);font-size:14.5px}
+  .stack{display:flex;flex-wrap:wrap;gap:7px;margin-top:2px}
+  .tag{font-size:11.5px;color:var(--text);background:var(--surface2);border:1px solid var(--border);padding:4px 9px;border-radius:6px}
+  .clinks{display:flex;gap:10px;margin-top:6px}
+  .clink{font-size:13.5px;font-weight:600;color:var(--green);display:inline-flex;align-items:center;gap:6px}
+  .clink.alt{color:var(--blue)}
+  .clink:hover{text-decoration:underline}
+  @media(min-width:760px){.grid.proj{grid-template-columns:1fr 1fr}}
+
+  /* also built */
+  .mini{display:grid;gap:14px;margin-top:6px}
+  @media(min-width:760px){.mini{grid-template-columns:1fr 1fr 1fr}}
+  .mcard{background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:18px}
+  .mcard h4{font-size:15.5px;margin-bottom:6px}
+  .mcard p{font-size:13px;color:var(--muted)}
+  .mcard .stack{margin-top:11px}
+
+  /* skills */
+  .skills{display:grid;gap:18px}
+  @media(min-width:760px){.skills{grid-template-columns:1fr 1fr}}
+  .skcol{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 22px}
+  .skcol h4{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin-bottom:14px}
+  .skcol .stack{gap:8px}
+
+  /* about */
+  .about p{font-size:16.5px;color:#c7d3df;max-width:68ch;margin-bottom:16px}
+  .about strong{color:var(--text)}
+
+  /* contact */
+  .contact{border-top:1px solid var(--border);background:var(--bg2)}
+  .clist{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+  footer{padding:30px 0 50px;color:var(--faint);font-size:13px;text-align:center}
+  .needfill{color:var(--magenta);border-color:#7a1f4d}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="dot"></span> Jeremy Flores</a>
+    <div class="navlinks">
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <div class="eyebrow"><span class="pulse"></span> Data Analyst · Financial-Markets Builder</div>
+  <h1>I turn live market data into <span class="hl">tools people can actually use.</span></h1>
+  <p class="lede">I'm a self-taught builder moving into data analytics. I design dashboards, data
+    pipelines, and automation — most of them pointed at financial markets, all of them shipped and
+    live. I like the messy part: taking raw, ugly data and turning it into something you can read in
+    ten seconds.</p>
+  <div class="cta">
+    <a class="btn primary" href="#work">View the work →</a>
+    <a class="btn" href="https://github.com/Jflores37" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn" href="https://linkedin.com/in/jeremyflores7" target="_blank" rel="noopener">LinkedIn</a>
+    <a class="btn" href="mailto:jer24fmg@gmail.com">Email</a>
+  </div>
+  <div class="ticker">
+    <span class="chip"><b>SQL</b> · Postgres</span>
+    <span class="chip"><b>Python</b> · pandas · Plotly</span>
+    <span class="chip"><b>React</b> · TypeScript</span>
+    <span class="chip"><b>Excel</b> · advanced</span>
+    <span class="chip"><b>Supabase</b> · Vercel</span>
+    <span class="chip"><b>Markets</b> · options · GEX</span>
+  </div>
+</header>
+
+<section id="work">
+  <div class="wrap">
+    <div class="shead"><span class="num mono">01</span><h2>Selected work</h2></div>
+    <p class="sub">Real, deployed projects — not tutorial clones. Each one took live data through a
+      pipeline and out to a usable interface.</p>
+
+    <div class="grid proj">
+
+      <!-- Market Metrics -->
+      <article class="card">
+        <div class="shot">
+          <div class="barbrowser"><i></i><i></i><i></i><span class="url mono">market-metrics-dashboard.vercel.app</span></div>
+          <img src="assets/market-metrics.png" alt="Market Metrics Dashboard — market terminal" />
+        </div>
+        <div class="cbody">
+          <div class="ctitle"><h3>Market Metrics Dashboard</h3><span class="badge">Live</span></div>
+          <p class="cdesc">A Bloomberg-style market terminal. A scheduled Supabase/Postgres pipeline
+            (edge functions on <span class="mono">pg_cron</span>) pulls FRED, Finviz, and Yahoo data into
+            database views; the React front end reads only from the DB — never third-party APIs at
+            runtime. Macro monitor, market breadth, stage analysis, sector pulse, and a "Should I Trade?"
+            quality score.</p>
+          <div class="stack">
+            <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Tailwind</span>
+            <span class="tag">Supabase / Postgres</span><span class="tag">Edge Functions</span>
+            <span class="tag">pg_cron</span><span class="tag">Vercel</span>
+          </div>
+          <div class="clinks">
+            <a class="clink" href="https://market-metrics-dashboard.vercel.app" target="_blank" rel="noopener">Live demo ↗</a>
+            <a class="clink alt" href="https://github.com/Jflores37/market-metrics-dashboard" target="_blank" rel="noopener">Code ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- BX Terminal -->
+      <article class="card">
+        <div class="shot">
+          <div class="barbrowser"><i></i><i></i><i></i><span class="url mono">bx-terminal.vercel.app</span></div>
+          <img src="assets/bx-terminal.png" alt="BX Terminal — momentum scanner" />
+        </div>
+        <div class="cbody">
+          <div class="ctitle"><h3>BX Terminal</h3><span class="badge">Live</span></div>
+          <p class="cdesc">A mobile-friendly trading terminal for the B-Xtrender momentum scanner. Live
+            scan results stream from Supabase into bullish / neutral / bearish boards with an embedded
+            candlestick chart. Keyboard-navigable, resilient fetching
+            (<span class="mono">Promise.allSettled</span>), and graceful error states.</p>
+          <div class="stack">
+            <span class="tag">React</span><span class="tag">Vite</span><span class="tag">JavaScript</span>
+            <span class="tag">Supabase</span><span class="tag">Vercel</span>
+          </div>
+          <div class="clinks">
+            <a class="clink" href="https://bx-terminal.vercel.app" target="_blank" rel="noopener">Live demo ↗</a>
+            <a class="clink alt" href="https://github.com/Jflores37/bx-terminal" target="_blank" rel="noopener">Code ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- T-Mobile Dashboard -->
+      <article class="card">
+        <div class="shot">
+          <div class="barbrowser"><i></i><i></i><i></i><span class="url mono">github.com/Jflores37/tmobile-store-performance-dashboard</span></div>
+          <img src="assets/tmobile-dashboard.png" alt="T-Mobile Store Performance Dashboard" />
+        </div>
+        <div class="cbody">
+          <div class="ctitle"><h3>Store Performance Dashboard</h3><span class="badge code">Excel · GitHub</span></div>
+          <p class="cdesc">A 35-tab Excel reporting workbook: KPI cards, an auto-ranking team leaderboard
+            (<span class="mono">RANK</span> + color-scale heatmaps), and a daily-trend heatmap, all driven
+            by multi-sheet formulas. Rebuilt from a broken tracker with 403 formula errors; after rollout
+            the store reached the top 25% of the district. <em>(Published with synthetic data.)</em></p>
+          <div class="stack">
+            <span class="tag">Excel</span><span class="tag">Advanced formulas</span>
+            <span class="tag">Conditional formatting</span><span class="tag">Data cleaning</span>
+            <span class="tag">KPI design</span>
+          </div>
+          <div class="clinks">
+            <a class="clink alt" href="https://github.com/Jflores37/tmobile-store-performance-dashboard" target="_blank" rel="noopener">Code + screenshots ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Market Dashboard (Python) -->
+      <article class="card">
+        <div class="shot">
+          <div class="barbrowser"><i></i><i></i><i></i><span class="url mono">Plotly Dash · Python</span></div>
+          <img src="assets/market-metrics.png" alt="Market Dashboard (Python / Plotly Dash)" style="filter:grayscale(.35) brightness(.8)" />
+        </div>
+        <div class="cbody">
+          <div class="ctitle"><h3>Market Dashboard <span class="mono" style="font-size:13px;color:var(--faint)">(Python)</span></h3><span class="badge code">Private</span></div>
+          <p class="cdesc">The Python predecessor to Market Metrics — a five-section market terminal built
+            with Plotly Dash and pandas ("Should I Trade?", breadth, stage analysis, sector RRG). Where I
+            worked out the data model before rebuilding it in React. Code available on request.</p>
+          <div class="stack">
+            <span class="tag">Python</span><span class="tag">Plotly Dash</span><span class="tag">pandas</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="more" style="padding-top:0">
+  <div class="wrap">
+    <div class="shead"><span class="num mono">02</span><h2>Also built</h2></div>
+    <p class="sub">Smaller tools and automation from the same habit of building what I needed.</p>
+    <div class="mini">
+      <div class="mcard">
+        <h4>Trading Alerts Bot</h4>
+        <p>A Discord bot that posts options trade entries, trims, and exits with running P&amp;L —
+          runs 24/7 as a scheduled service.</p>
+        <div class="stack"><span class="tag">Node.js</span><span class="tag">Discord.js</span><span class="tag">Docker</span></div>
+      </div>
+      <div class="mcard">
+        <h4>Gamma / GEX Scanners</h4>
+        <p>Python tools that scan ~100 tickers for options gamma-exposure walls, pulling option chains
+          from CBOE and Polygon and computing dealer positioning.</p>
+        <div class="stack"><span class="tag">Python</span><span class="tag">CBOE / Polygon</span><span class="tag">Options / GEX</span></div>
+      </div>
+      <div class="mcard">
+        <h4>ViralEdge</h4>
+        <p>An X/Twitter analytics dashboard: a Python worker scrapes niche feeds to Vercel Blob; a React
+          app scores and ranks posts. <em>(Demo being cleaned up.)</em></p>
+        <div class="stack"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Python</span><span class="tag">Vercel Blob</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills" style="padding-top:0">
+  <div class="wrap">
+    <div class="shead"><span class="num mono">03</span><h2>Skills</h2></div>
+    <p class="sub">What I actually use, grouped by where it lives in a project.</p>
+    <div class="skills">
+      <div class="skcol">
+        <h4>Data &amp; Analytics</h4>
+        <div class="stack">
+          <span class="tag">SQL (Postgres)</span><span class="tag">Python</span><span class="tag">pandas</span>
+          <span class="tag">Plotly / Dash</span><span class="tag">Excel (advanced)</span>
+          <span class="tag">Data cleaning</span><span class="tag">KPI design</span><span class="tag">Dashboards</span>
+        </div>
+      </div>
+      <div class="skcol">
+        <h4>Web &amp; Deploy</h4>
+        <div class="stack">
+          <span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Next.js</span>
+          <span class="tag">Tailwind</span><span class="tag">Node.js</span><span class="tag">Vite</span>
+          <span class="tag">Supabase</span><span class="tag">Vercel</span>
+        </div>
+      </div>
+      <div class="skcol">
+        <h4>Markets Domain</h4>
+        <div class="stack">
+          <span class="tag">Equity &amp; options</span><span class="tag">GEX / Greeks</span>
+          <span class="tag">Market breadth</span><span class="tag">FRED</span><span class="tag">Finviz</span>
+          <span class="tag">Polygon</span><span class="tag">CBOE</span><span class="tag">TradeStation</span>
+        </div>
+      </div>
+      <div class="skcol">
+        <h4>Engineering &amp; Tooling</h4>
+        <div class="stack">
+          <span class="tag">Git / GitHub</span><span class="tag">REST APIs</span><span class="tag">Web scraping</span>
+          <span class="tag">Cron / automation</span><span class="tag">Edge functions</span><span class="tag">Discord bots</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about" style="padding-top:0">
+  <div class="wrap">
+    <div class="shead"><span class="num mono">04</span><h2>About</h2></div>
+    <p>I manage a T-Mobile retail store, and I taught myself to build the data tools I wished I had on
+      the floor. It started by rebuilding a broken store-performance workbook — fixing 403 formula
+      errors and making the totals actually total. After I rolled it out, my store moved into the
+      <strong>top 25% of the district.</strong></p>
+    <p>That turned into a habit. Since then I've shipped live market dashboards backed by real data
+      pipelines, a momentum-scanner terminal, options-analytics scanners, and a handful of automation
+      bots — building, breaking, and fixing in public on nights and weekends.</p>
+    <p>Now I'm moving into <strong>data analytics full-time.</strong> The instinct is the same one that
+      moved my store's numbers: take messy data and turn it into something a person can act on in ten
+      seconds. That's the whole job, and it's the part I like most.</p>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="shead"><span class="num mono">05</span><h2>Let's talk</h2></div>
+    <p class="sub">Open to remote data analyst &amp; financial-data roles. The fastest way to reach me is email.</p>
+    <div class="clist">
+      <a class="btn primary" href="mailto:jer24fmg@gmail.com">jer24fmg@gmail.com</a>
+      <a class="btn" href="https://github.com/Jflores37" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn" href="https://linkedin.com/in/jeremyflores7" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© <span class="mono">2026</span> Jeremy Flores · Built from scratch · <span class="mono">Jflores37</span></div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+# preview / unused assets — never publish
+assets/_preview-full.png
+assets/viraledge.png
+
+# OS junk
+Thumbs.db
+Desktop.ini
+.DS_Store
