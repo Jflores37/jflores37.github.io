@@ -154,7 +154,7 @@
     <a class="btn" href="mailto:jer24fmg@gmail.com">Email</a>
   </div>
   <div class="ticker">
-    <span class="chip"><b>SQL</b> · Postgres</span>
+    <span class="chip"><b>Excel</b> · Google Sheets</span>
     <span class="chip"><b>Python</b> · pandas · Plotly</span>
     <span class="chip"><b>React</b> · TypeScript</span>
     <span class="chip"><b>Excel</b> · advanced</span>
@@ -229,8 +229,8 @@
           <div class="ctitle"><h3>Store Performance Dashboard</h3><span class="badge code">Excel · GitHub</span></div>
           <p class="cdesc">A 35-tab Excel reporting workbook: KPI cards, an auto-ranking team leaderboard
             (<span class="mono">RANK</span> + color-scale heatmaps), and a daily-trend heatmap, all driven
-            by multi-sheet formulas. Rebuilt from a broken tracker with 403 formula errors; after rollout
-            the store reached the top 25% of the district. <em>(Published with synthetic data.)</em></p>
+            by multi-sheet formulas. Rebuilt from an inherited tracker carrying 403 formula errors and no
+            working totals, into reporting the team actually trusts. <em>(Published with synthetic data.)</em></p>
           <div class="stack">
             <span class="tag">Excel</span><span class="tag">Advanced formulas</span>
             <span class="tag">Conditional formatting</span><span class="tag">Data cleaning</span>
@@ -238,40 +238,6 @@
           </div>
           <div class="clinks">
             <a class="clink alt" href="https://github.com/Jflores37/tmobile-store-performance-dashboard" target="_blank" rel="noopener">Code + screenshots ↗</a>
-          </div>
-        </div>
-      </article>
-
-      <!-- Markets SQL Analysis -->
-      <article class="card">
-        <div class="shot">
-          <div class="barbrowser"><i></i><i></i><i></i><span class="url mono">github.com/Jflores37/markets-sql-analysis</span></div>
-          <pre class="codeshot"><span class="cm">-- sector relative strength</span>
-<span class="kw">WITH</span> latest <span class="kw">AS</span> (
-  <span class="kw">SELECT</span> * <span class="kw">FROM</span> scanner_results
-  <span class="kw">WHERE</span> snapshot_date = (
-    <span class="kw">SELECT MAX</span>(snapshot_date)
-    <span class="kw">FROM</span> scanner_results)
-)
-<span class="kw">SELECT</span>
-  <span class="kw">RANK</span>() <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> avg_perf <span class="kw">DESC</span>)
-    <span class="kw">AS</span> sector_rank,
-  sector, avg_perf, pct_stage2
-<span class="kw">FROM</span> sector_stats
-<span class="kw">ORDER BY</span> sector_rank;</pre>
-        </div>
-        <div class="cbody">
-          <div class="ctitle"><h3>Markets SQL Analysis</h3><span class="badge">Runnable</span></div>
-          <p class="cdesc">Four analyst-style SQL studies on an equity-scanner panel — sector rotation,
-            market breadth, momentum leadership — each framed as a stakeholder decision. Window functions
-            (<span class="mono">RANK, NTILE, LAG, PERCENT_RANK</span>), multi-CTE pipelines, moving-average
-            frames. Runs with one command (SQLite); the same SQL targets Postgres. Synthetic data.</p>
-          <div class="stack">
-            <span class="tag">SQL</span><span class="tag">Window functions</span><span class="tag">CTEs</span>
-            <span class="tag">Postgres / SQLite</span><span class="tag">Python</span>
-          </div>
-          <div class="clinks">
-            <a class="clink alt" href="https://github.com/Jflores37/markets-sql-analysis" target="_blank" rel="noopener">Code + queries ↗</a>
           </div>
         </div>
       </article>
@@ -321,8 +287,8 @@
       <div class="skcol">
         <h4>Data &amp; Analytics</h4>
         <div class="stack">
-          <span class="tag">SQL (Postgres)</span><span class="tag">Python</span><span class="tag">pandas</span>
-          <span class="tag">Plotly / Dash</span><span class="tag">Excel (advanced)</span>
+          <span class="tag">Excel (advanced)</span><span class="tag">Google Sheets</span><span class="tag">Python</span>
+          <span class="tag">pandas</span><span class="tag">Plotly / Dash</span>
           <span class="tag">Data cleaning</span><span class="tag">KPI design</span><span class="tag">Dashboards</span>
         </div>
       </div>
@@ -356,10 +322,10 @@
 <section id="about" class="about" style="padding-top:0">
   <div class="wrap">
     <div class="shead"><span class="num mono">04</span><h2>About</h2></div>
-    <p>I manage a T-Mobile retail store, and I taught myself to build the data tools I wished I had on
-      the floor. It started by rebuilding a broken store-performance workbook — fixing 403 formula
-      errors and making the totals actually total. After I rolled it out, my store moved into the
-      <strong>top 25% of the district.</strong></p>
+    <p>I help run a T-Mobile retail store, and I taught myself to build the data tools I wished I had on
+      the floor. It started by rebuilding a broken store-performance workbook — <strong>fixing 403 formula
+      errors and making the totals actually total</strong> — so the team finally had numbers they could
+      trust instead of a tracker nobody opened.</p>
     <p>That turned into a habit. Since then I've shipped live market dashboards backed by real data
       pipelines, a momentum-scanner terminal, options-analytics scanners, and a handful of automation
       bots — building, breaking, and fixing in public on nights and weekends.</p>
